@@ -1,0 +1,12 @@
+.vs/
+.idea/
+obj/
+bin/
+*.user
+*.suo
+
+# Local, machine-specific files (not shared)
+publish.sh
+AGENTS.md
+CLAUDE.md
+*.plan.md

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+	<PropertyGroup>
+		<Authors>Zhyra</Authors>
+		<Version>0.1.7</Version>
+		<Description>Notifies you before each Ishgardian Restoration Fête (Skyrise Celebration) in the Firmament.</Description>
+		<PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/edg-l/FeteTimer</PackageProjectUrl>
+		<IsPackable>false</IsPackable>
+		<LangVersion>latest</LangVersion>
+		<AssemblyName>FeteTimer</AssemblyName>
+		<RootNamespace>FeteTimer</RootNamespace>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ECommons" Version="3.2.1.6" />
+	</ItemGroup>
+
+	<!-- Shared dev-only helpers (linked source from the sibling ZhyraPluginKit repo). -->
+	<ItemGroup>
+		<Compile Include="..\..\ZhyraPluginKit\DevTelemetry.cs" Link="Dev\DevTelemetry.cs" />
+	</ItemGroup>
+
+</Project>
