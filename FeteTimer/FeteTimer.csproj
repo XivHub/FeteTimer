@@ -17,9 +17,9 @@
 		<PackageReference Include="ECommons" Version="3.2.1.6" />
 	</ItemGroup>
 
-	<!-- Shared dev-only helpers (linked source from the sibling ZhyraPluginKit repo). -->
+	<!-- Shared dev-only helpers (linked source from the sibling XivHubPluginKit repo). -->
 	<ItemGroup>
-		<Compile Include="..\..\ZhyraPluginKit\DevTelemetry.cs" Link="Dev\DevTelemetry.cs" />
+		<Compile Include="..\..\XivHubPluginKit\DevTelemetry.cs" Link="Dev\DevTelemetry.cs" />
 	</ItemGroup>
 
 </Project>

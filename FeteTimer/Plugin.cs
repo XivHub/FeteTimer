@@ -12,7 +12,7 @@ using FeteTimer.Game;
 using FeteTimer.IPC;
 using FeteTimer.Scheduler;
 using FeteTimer.Windows;
-using ZhyraPluginKit;
+using XivHubPluginKit;
 
 namespace FeteTimer
 {
