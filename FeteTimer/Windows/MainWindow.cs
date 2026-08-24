@@ -6,13 +6,12 @@ using Dalamud.Interface.Windowing;
 using FeteTimer.Game;
 using FeteTimer.Loc;
 using FeteTimer.Scheduler;
+using XivHubPluginKit.UI;
 
 namespace FeteTimer.Windows
 {
     public class MainWindow : Window, IDisposable
     {
-        private static readonly Vector4 Dim = new(0.60f, 0.60f, 0.60f, 1f);
-
         public MainWindow(Configuration configuration) : base("FeteTimer###FeteTimerMain")
         {
             SizeConstraints = new WindowSizeConstraints
@@ -69,7 +68,7 @@ namespace FeteTimer.Windows
 
         private void DrawRestGapLine()
         {
-            using (ImRaii.PushColor(ImGuiCol.Text, Dim))
+            using (ImRaii.PushColor(ImGuiCol.Text, HubStyle.Faint))
             {
                 ImGui.TextWrapped(Strings.RestGapInfo);
             }

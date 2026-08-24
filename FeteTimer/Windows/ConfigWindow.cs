@@ -5,13 +5,12 @@ using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using FeteTimer.Alerts;
 using FeteTimer.Loc;
+using XivHubPluginKit.UI;
 
 namespace FeteTimer.Windows
 {
     public class ConfigWindow : Window, IDisposable
     {
-        private static readonly Vector4 Dim = new(0.60f, 0.60f, 0.60f, 1f);
-
         public ConfigWindow(Configuration configuration) : base($"{Strings.SettingsTitle}###FeteTimerConfig")
         {
             SizeConstraints = new WindowSizeConstraints
@@ -30,6 +29,8 @@ namespace FeteTimer.Windows
             DrawLeadTimes();
             ImGui.Separator();
             DrawSound();
+            ImGui.Separator();
+            DrawAppearance();
             ImGui.Separator();
             DrawDeveloperSection();
             ImGui.Spacing();
@@ -125,6 +126,18 @@ namespace FeteTimer.Windows
                 AlertChannels.FireAllEnabled(Strings.AlertTitle, Strings.TestAlertMessage);
         }
 
+        /// <summary>
+        /// The theme editor is generated from the kit's option table, so this stays
+        /// one call however many themed values the kit grows.
+        /// </summary>
+        private static void DrawAppearance()
+        {
+            ImGui.TextDisabled(Strings.HdrAppearance);
+            ImGui.TextColored(HubStyle.Faint, Strings.AppearanceDesc);
+            ImGui.Spacing();
+            HubThemeEditor.Draw(Plugin.ThemeConfig);
+        }
+
         private void DrawDeveloperSection()
         {
             if (ImGui.CollapsingHeader(Strings.HdrDeveloper))
@@ -151,7 +164,7 @@ namespace FeteTimer.Windows
 
         private void DrawDisclaimer()
         {
-            using (ImRaii.PushColor(ImGuiCol.Text, Dim))
+            using (ImRaii.PushColor(ImGuiCol.Text, HubStyle.Faint))
             {
                 ImGui.TextWrapped(Strings.Disclaimer);
             }

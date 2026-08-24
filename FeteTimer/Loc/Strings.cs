@@ -62,6 +62,8 @@ namespace FeteTimer.Loc
         public static string LblSoundId => T("Sound effect ID", "ID del efecto de sonido");
         public static string BtnTestSound => T("Test sound", "Probar sonido");
         public static string BtnTestAlert => T("Test alert", "Probar aviso");
+        public static string HdrAppearance => T("Appearance", "Apariencia");
+        public static string AppearanceDesc => T("Shared with every XIV Hub plugin.", "Compartido con todos los plugins de XIV Hub.");
         public static string HdrDeveloper => T("Developer", "Desarrollo");
         public static string DevDesc => T("Streams live activity + state snapshots to a local log server.", "Envía la actividad y el estado en tiempo real a un servidor de logs local.");
         public static string ChkDevLog => T("Enable dev telemetry", "Activar la telemetría de desarrollo");

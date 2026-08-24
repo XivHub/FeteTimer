@@ -13,6 +13,7 @@ using FeteTimer.IPC;
 using FeteTimer.Scheduler;
 using FeteTimer.Windows;
 using XivHubPluginKit;
+using XivHubPluginKit.UI;
 
 namespace FeteTimer
 {
@@ -35,6 +36,9 @@ namespace FeteTimer
         public static DevTelemetry? Telemetry { get; private set; }
         public static ITeleportBackend Teleport { get; private set; } = null!;
 
+        /// <summary>Shared across every XIV Hub plugin; see XivHubPluginKit/UI/THEME.md.</summary>
+        public static HubThemeConfigService ThemeConfig { get; private set; } = null!;
+
         public WindowSystem WindowSystem = new("FeteTimer");
         private readonly MainWindow mainWindow;
         private readonly ConfigWindow configWindow;
@@ -51,6 +55,11 @@ namespace FeteTimer
             var config = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
             config.Initialize(PluginInterface);
             C = config;
+
+            ThemeConfig = new HubThemeConfigService(
+                PluginInterface.GetPluginConfigDirectory(),
+                (msg, ex) => Logger.Warning(ex, msg));
+            HubStyle.Init(ThemeConfig);
 
             Telemetry = new DevTelemetry("FeteTimer", () => C.DevLog, () => C.DevLogUrl,
                 err => Logger.Debug($"DevLog post failed: {err}"));
@@ -144,6 +153,17 @@ namespace FeteTimer
 
         private void ToggleConfigUi() => configWindow.Toggle();
 
-        private void DrawUI() => WindowSystem.Draw();
+        /// <summary>
+        /// One wrap point for the whole plugin: no window class knows the theme
+        /// exists, and the pop is guaranteed even if a window throws mid-draw —
+        /// ImGui's style stack is global, so an unbalanced push corrupts every
+        /// plugin drawing after this one.
+        /// </summary>
+        private void DrawUI()
+        {
+            HubStyle.Push();
+            try { WindowSystem.Draw(); }
+            finally { HubStyle.Pop(); }
+        }
     }
 }
