@@ -1,7 +1,6 @@
 using System;
 using Dalamud.Game.Command;
 using Dalamud.Game.Text.SeStringHandling;
-using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
@@ -94,13 +93,13 @@ namespace FeteTimer
         private static SeString BuildDtrText()
         {
             if (FeteScheduler.InProgress)
-                return new SeString(new TextPayload(Loc.Strings.DtrNow));
+                return Loc.Strings.DtrNow;
 
             var next = FeteScheduler.NextFeteUtc;
             if (FeteScheduler.CurrentPhase == SchedulePhase.CountingDown && next.HasValue)
-                return new SeString(new TextPayload(Loc.Strings.DtrCountdown(SchedulePredictor.FormatCountdown(next.Value - DateTime.UtcNow))));
+                return Loc.Strings.DtrCountdown(SchedulePredictor.FormatCountdown(next.Value - DateTime.UtcNow));
 
-            return new SeString(new TextPayload(Loc.Strings.DtrIdle));
+            return Loc.Strings.DtrIdle;
         }
 
         private void OnFrameworkUpdate(IFramework framework) => FeteScheduler.Tick();
