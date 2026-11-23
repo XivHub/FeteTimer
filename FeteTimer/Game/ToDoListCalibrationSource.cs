@@ -34,10 +34,12 @@ namespace FeteTimer.Game
         private const uint CountdownNodeId = 0;
 
         /// <summary>
-        /// Matches a "&lt;number&gt;&lt;unit&gt;" token where unit is d/h/m/s (case-insensitive). Scanning for
-        /// tokens anywhere in the string tolerates prefixes like "Fêtes commencing in ".
+        /// Matches a "&lt;number&gt;&lt;unit&gt;" token. The English client writes d/h/m/s
+        /// ("Fêtes commencing in 1d 12h 43m"); the Japanese client writes 日/時間/分/秒
+        /// ("次回のFête開催まで15時間45分"). Scanning for tokens anywhere in the string tolerates the
+        /// label in front of the countdown in either language.
         /// </summary>
-        private static readonly Regex TokenRegex = new(@"(\d+)\s*([dhms])", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex TokenRegex = new(@"(\d+)\s*(日|時間|分|秒|[dhms])", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>Substring (case-insensitive) that marks an active fête, e.g. "Fêtes are in progress!".</summary>
         private const string InProgressMarker = "in progress";
@@ -96,7 +98,7 @@ namespace FeteTimer.Game
         }
 
         /// <summary>
-        /// Parses a countdown like "1d 12h 43m", "58m", "2h 5m 30s" by summing d/h/m/s tokens found
+        /// Parses a countdown like "1d 12h 43m", "58m", "2h 5m 30s" or "15時間45分" by summing the unit tokens found
         /// anywhere in the text (any surrounding label is ignored). Returns false if no positive
         /// duration is present.
         /// </summary>
@@ -116,12 +118,12 @@ namespace FeteTimer.Game
                 if (!int.TryParse(mt.Groups[1].Value, out var val))
                     continue;
 
-                switch (char.ToLowerInvariant(mt.Groups[2].Value[0]))
+                switch (mt.Groups[2].Value.ToLowerInvariant())
                 {
-                    case 'd': d = val; break;
-                    case 'h': h = val; break;
-                    case 'm': m = val; break;
-                    case 's': s = val; break;
+                    case "d" or "日": d = val; break;
+                    case "h" or "時間": h = val; break;
+                    case "m" or "分": m = val; break;
+                    case "s" or "秒": s = val; break;
                 }
             }
 
