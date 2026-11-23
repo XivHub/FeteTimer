@@ -2,7 +2,7 @@
   "Author": "XivHub",
   "Name": "FeteTimer",
   "InternalName": "FeteTimer",
-  "Punchline": "Never miss another Firmament Fête.",
+  "Punchline": "Alerts you before each Firmament Fête starts.",
   "Description": "Calibrates the Ishgardian Restoration Fête (Skyrise Celebration) countdown from the in-game objective list while you are in the Firmament and fires configurable chat, notification, and sound alerts at your chosen lead times.",
   "RepoUrl": "https://github.com/XivHub/FeteTimer",
   "IconUrl": "https://raw.githubusercontent.com/edg-l/FeteTimer/main/images/icon.png",
