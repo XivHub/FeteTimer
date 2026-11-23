@@ -5,7 +5,7 @@
   "Punchline": "Alerts you before each Firmament Fête starts.",
   "Description": "Counts down to the next Ishgardian Restoration Fête (Skyrise Celebration). It reads the time from the objective list while you are in the Firmament, then alerts you by chat, notification or sound at the lead times you choose.",
   "RepoUrl": "https://github.com/XivHub/FeteTimer",
-  "IconUrl": "https://raw.githubusercontent.com/edg-l/FeteTimer/main/images/icon.png",
+  "IconUrl": "https://raw.githubusercontent.com/XivHub/FeteTimer/main/FeteTimer/images/icon.png",
   "ApplicableVersion": "any",
   "Tags": [
     "firmament",
